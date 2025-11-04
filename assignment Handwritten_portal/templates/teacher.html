@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Teacher Dashboard</title>
+</head>
+<body>
+    <h1>Submitted Assignments</h1>
+    <table border="1" cellpadding="10">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Subject</th>
+            <th>File</th>
+            <th>Date</th>
+        </tr>
+
+        {% for row in data %}
+        <tr>
+            <td>{{ row[0] }}</td>
+            <td>{{ row[1] }}</td>
+            <td>{{ row[2] }}</td>
+            <td>
+                <a href="{{ url_for('uploaded_file', filename=row[3]) }}" target="_blank">View File</a>
+                {% if row[3].endswith('.jpg') or row[3].endswith('.png') or row[3].endswith('.jpeg') %}
+                    <br>
+                    <img src="{{ url_for('uploaded_file', filename=row[3]) }}" alt="Assignment Image" width="200">
+                {% endif %}
+            </td>
+            <td>{{ row[4] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <br>
+    <a href="/">⬅ Back to Home</a>
+</body>
+</html>
